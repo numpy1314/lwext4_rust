@@ -73,13 +73,13 @@ impl Ext4File {
             return Err(r);
         }
         //self.file_desc_map.insert(to_map, fd); // store c_path
-        debug!("file_open {}, mp={:#x}", path, self.file_desc.mp as usize);
+        //debug!("file_open {}, mp={:#x}", path, self.file_desc.mp as usize);
         Ok(EOK as usize)
     }
 
     pub fn file_close(&mut self) -> Result<usize, i32> {
         if self.file_desc.mp != core::ptr::null_mut() {
-            debug!("file_close {:?}", self.get_path());
+            //debug!("file_close {:?}", self.get_path());
             // self.file_cache_flush()?;
             unsafe {
                 ext4_fclose(&mut self.file_desc);
@@ -101,7 +101,7 @@ impl Ext4File {
                 "r+"
             }
         };
-        debug!("flags_to_cstring: {}", cstr);
+        //debug!("flags_to_cstring: {}", cstr);
         CString::new(cstr).expect("CString::new OpenFlags failed")
     }
 
@@ -202,7 +202,7 @@ impl Ext4File {
             return Err(r);
         }
 
-        debug!("file_read {:?}, len={}", self.get_path(), rw_count);
+        //debug!("file_read {:?}, len={}", self.get_path(), rw_count);
 
         Ok(rw_count)
     }

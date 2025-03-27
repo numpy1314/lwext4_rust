@@ -141,7 +141,7 @@ impl<K: KernelDevOp> Ext4BlockWrapper<K> {
         blk_id: u64,
         blk_cnt: u32,
     ) -> ::core::ffi::c_int {
-        debug!("READ Ext4 block id: {}, count: {}", blk_id, blk_cnt);
+        //debug!("READ Ext4 block id: {}, count: {}", blk_id, blk_cnt);
         let devt = unsafe { &mut *((*(*bdev).bdif).p_user as *mut K::DevType) };
 
         let seek_off = K::seek(
@@ -175,7 +175,7 @@ impl<K: KernelDevOp> Ext4BlockWrapper<K> {
         blk_id: u64,
         blk_cnt: u32,
     ) -> ::core::ffi::c_int {
-        debug!("WRITE Ext4 block id: {}, count: {}", blk_id, blk_cnt);
+        //debug!("WRITE Ext4 block id: {}, count: {}", blk_id, blk_cnt);
 
         let devt = unsafe { &mut *((*(*bdev).bdif).p_user as *mut K::DevType) };
         //let mut devt = unsafe { K::DevType::borrow_mut((*(*bdev).bdif).p_user) };
