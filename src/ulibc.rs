@@ -27,7 +27,7 @@ unsafe extern "C" fn printf(str: *const c_char, mut args: ...) -> c_int {
     let c_str = unsafe { CStr::from_ptr(str) };
     //let arg1 = args.arg::<usize>();
 
-    info!("[lwext4] {:?}", c_str);
+    trace!("[lwext4] {:?}", c_str);
     0
 }
 

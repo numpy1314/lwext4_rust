@@ -339,40 +339,40 @@ impl<K: KernelDevOp> Ext4BlockWrapper<K> {
             ext4_mount_point_stats(c_mountpoint, &mut stats);
         }
 
-        info!("********************");
-        info!("ext4_mount_point_stats");
-        info!("inodes_count = {:x?}", stats.inodes_count);
-        info!("free_inodes_count = {:x?}", stats.free_inodes_count);
-        info!("blocks_count = {:x?}", stats.blocks_count);
-        info!("free_blocks_count = {:x?}", stats.free_blocks_count);
-        info!("block_size = {:x?}", stats.block_size);
-        info!("block_group_count = {:x?}", stats.block_group_count);
-        info!("blocks_per_group= {:x?}", stats.blocks_per_group);
-        info!("inodes_per_group = {:x?}", stats.inodes_per_group);
+        trace!("********************");
+        trace!("ext4_mount_point_stats");
+        trace!("inodes_count = {:x?}", stats.inodes_count);
+        trace!("free_inodes_count = {:x?}", stats.free_inodes_count);
+        trace!("blocks_count = {:x?}", stats.blocks_count);
+        trace!("free_blocks_count = {:x?}", stats.free_blocks_count);
+        trace!("block_size = {:x?}", stats.block_size);
+        trace!("block_group_count = {:x?}", stats.block_group_count);
+        trace!("blocks_per_group= {:x?}", stats.blocks_per_group);
+        trace!("inodes_per_group = {:x?}", stats.inodes_per_group);
 
         let vol_name = unsafe { core::ffi::CStr::from_ptr(&stats.volume_name as _) };
-        info!("volume_name = {:?}", vol_name);
-        info!("********************\n");
+        trace!("volume_name = {:?}", vol_name);
+        trace!("********************\n");
     }
 
     pub fn print_lwext4_block_stats(&self) {
         let ext4dev = &(self.value);
         //if ext4dev.is_null { return; }
 
-        info!("********************");
-        info!("ext4 blockdev stats");
+        trace!("********************");
+        trace!("ext4 blockdev stats");
         unsafe {
-            info!("bdev->bread_ctr = {:?}", (*ext4dev.bdif).bread_ctr);
-            info!("bdev->bwrite_ctr = {:?}", (*ext4dev.bdif).bwrite_ctr);
+            trace!("bdev->bread_ctr = {:?}", (*ext4dev.bdif).bread_ctr);
+            trace!("bdev->bwrite_ctr = {:?}", (*ext4dev.bdif).bwrite_ctr);
 
-            info!("bcache->ref_blocks = {:?}", (*ext4dev.bc).ref_blocks);
-            info!(
+            trace!("bcache->ref_blocks = {:?}", (*ext4dev.bc).ref_blocks);
+            trace!(
                 "bcache->max_ref_blocks = {:?}",
                 (*ext4dev.bc).max_ref_blocks
             );
-            info!("bcache->lru_ctr = {:?}", (*ext4dev.bc).lru_ctr);
+            trace!("bcache->lru_ctr = {:?}", (*ext4dev.bc).lru_ctr);
         }
-        info!("********************\n");
+        trace!("********************\n");
     }
 }
 
