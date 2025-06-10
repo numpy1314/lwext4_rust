@@ -36,7 +36,8 @@ fn main() {
     let lwext4_lib = &format!("lwext4-{}", arch);
     let lwext4_lib_path = &format!("c/lwext4/lib{}.a", lwext4_lib);
     if !Path::new(lwext4_lib_path).exists() {
-        let status = Command::new("make")
+
+        let mut status = Command::new("make")
             .args(&[
                 "musl-generic",
                 "-C",
@@ -45,8 +46,31 @@ fn main() {
             .arg(&format!("ARCH={}", arch))
             .status()
             .expect("failed to execute process: make lwext4");
-        assert!(status.success());
 
+        let mut count = 0;
+        while !status.success() {
+            println!("Command failed, retrying...");
+
+            // Optional: Add a delay to prevent tight loop (to avoid overloading the system)
+            std::thread::sleep(std::time::Duration::from_secs(1));
+
+            status = Command::new("make")
+                .args(&[
+                    "musl-generic",
+                    "-C",
+                    c_path.to_str().expect("invalid path of lwext4"),
+                ])
+                .arg(&format!("ARCH={}", arch))
+                .status()
+                .expect("failed to execute process: make lwext4");
+
+
+            count += 1;
+            if count > 10 {
+                break;
+            }
+        }
+        assert!(status.success());
         if !Path::new("src/bindings.rs").exists() {
             let cc = &format!("{}-linux-musl-gcc", arch);
             let output = Command::new(cc)
