@@ -125,10 +125,10 @@ impl Ext4File {
             drop(CString::from_raw(c_path));
         }
         if r == EOK as i32 {
-            debug!("{:?} {} Exist", mtype, path);
+            trace!("{:?} {} Exist", mtype, path);
             true //Exist
         } else {
-            debug!("{:?} {} No Exist. ext4_inode_exist rc = {}", mtype, path, r);
+            trace!("{:?} {} No Exist. ext4_inode_exist rc = {}", mtype, path, r);
             false
         }
     }
@@ -283,7 +283,7 @@ impl Ext4File {
             error!("ext4_mode_get: rc = {}", r);
             return Err(r);
         }
-        debug!("Got file mode={:#x}", mode);
+        trace!("Got file mode={:#x}", mode);
         Ok(mode)
     }
 
@@ -325,7 +325,7 @@ impl Ext4File {
                 InodeTypes::EXT4_INODE_MODE_FILE
             }
         };
-        debug!("Inode mode types: {:?}", itypes);
+        trace!("Inode mode types: {:?}", itypes);
 
         itypes
     }
@@ -414,7 +414,7 @@ impl Ext4File {
                 sss[..len].copy_from_slice(&dentry.name[..len]);
                 sss[len] = 0;
 
-                debug!(
+                trace!(
                     "  {} {}",
                     dentry.inode_type,
                     core::str::from_utf8(&sss).unwrap()

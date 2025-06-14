@@ -1,8 +1,8 @@
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index eec0993..e735f60 100644
+index eec0993..b4bf35e 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
-@@ -43,10 +43,16 @@ else()
+@@ -43,10 +43,17 @@ else()
        set(BLOCKDEV_TYPE  linux)
      endif()
      set (INSTALL_LIB 1)
@@ -17,6 +17,7 @@ index eec0993..e735f60 100644
 +    add_definitions(-DCONFIG_HAVE_OWN_ERRNO=1)
 +    add_definitions(-DCONFIG_HAVE_OWN_ASSERT=1)
 +    add_definitions(-DCONFIG_USE_USER_MALLOC=0)
++    add_definitions(-DCONFIG_JOURNALING_ENABLE=0)
      add_definitions(-DCONFIG_BLOCK_DEV_CACHE_SIZE=16)
 +
      add_subdirectory(fs_test)

@@ -27,7 +27,7 @@ set(CMAKE_ASM_FLAGS "" CACHE INTERNAL "asm compiler flags")
 
 # set(CMAKE_PASS_LIB_FLAGS " -I/home/os/rust/arceos/ulib/axlibc/include ")
 # set(CMAKE_C_FLAGS "-nostdinc -fno-builtin -ffreestanding ${CMAKE_PASS_LIB_FLAGS} ${CMAKE_C_FLAGS}")
-set(CMAKE_C_FLAGS "-fPIC -fno-builtin -ffreestanding ${CMAKE_C_FLAGS}")
+set(CMAKE_C_FLAGS "-march=armv8-a+nosimd+nofp -fPIC -fno-builtin -ffreestanding ${CMAKE_C_FLAGS}")
 set(CMAKE_CXX_FLAGS "-fPIC -nostdinc -fno-builtin -ffreestanding ${CMAKE_CXX_FLAGS}")
 
 if (APPLE)
